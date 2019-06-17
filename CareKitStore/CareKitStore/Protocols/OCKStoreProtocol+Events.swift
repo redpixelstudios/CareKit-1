@@ -207,9 +207,40 @@ public extension OCKStoreProtocol {
     
     private func computeCompletion(for event: OCKEvent<OCKTask, OCKOutcome>) -> Double {
         let expectedValues = event.scheduleEvent.element.targetValues
-        let valuesRequiredForComplete = !expectedValues.isEmpty ? expectedValues.count : 1
-        let valueCount = event.outcome?.values.count ?? 0
-        let fractionComplete = min(1.0, Double(valueCount) / Double(valuesRequiredForComplete))
+        
+        var valuesRequiredForComplete = 0
+        var unitValuesRequiredForComplete = [String: Double]()
+        
+        for expectedValue in expectedValues {
+            if let units = expectedValue.units {
+                let value = expectedValue.doubleValue ?? Double(expectedValue.integerValue ?? 0)
+                unitValuesRequiredForComplete[units, default: 0] += value
+            } else {
+                valuesRequiredForComplete += 1
+            }
+        }
+        
+        var valueCount = 0
+        var unitValues = [String: Double]()
+        
+        for storedValue in event.outcome?.values ?? [] {
+            if let units = storedValue.units {
+                let value = storedValue.doubleValue ?? Double(storedValue.integerValue ?? 0)
+                unitValues[units, default: 0] += value
+            } else {
+                valueCount += 1
+            }
+        }
+        
+        let denominator = Double(valuesRequiredForComplete + unitValuesRequiredForComplete.keys.count)
+        var numerator = Double(min(valueCount, valuesRequiredForComplete))
+        
+        unitValuesRequiredForComplete.forEach { (item) in
+            let (units, value) = item
+            numerator += min(1.0, unitValues[units, default: 0] / value)
+        }
+        
+        let fractionComplete = numerator / denominator
         return fractionComplete
     }
     
