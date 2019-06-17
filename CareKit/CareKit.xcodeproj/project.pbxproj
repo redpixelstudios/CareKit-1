@@ -53,6 +53,8 @@
 		F9350B5522B3FD3D00CC0399 /* OCKBindableMultiLogTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9350B5422B3FD3D00CC0399 /* OCKBindableMultiLogTaskView.swift */; };
 		F9350B5722B42D4C00CC0399 /* OCKBindableLogTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9350B5622B42D4C00CC0399 /* OCKBindableLogTaskView.swift */; };
 		F9350B5B22B44FD300CC0399 /* OCKLogTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9350B5A22B44FD300CC0399 /* OCKLogTaskViewController.swift */; };
+		F9B48DAD22B7FF9F00D9BD9E /* OCKCustomLogTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B48DAB22B7FF9F00D9BD9E /* OCKCustomLogTaskViewController.swift */; };
+		F9B48DAF22B8151100D9BD9E /* OCKBindableCustomLogTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B48DAE22B8151100D9BD9E /* OCKBindableCustomLogTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +154,8 @@
 		F9350B5422B3FD3D00CC0399 /* OCKBindableMultiLogTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCKBindableMultiLogTaskView.swift; sourceTree = "<group>"; };
 		F9350B5622B42D4C00CC0399 /* OCKBindableLogTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCKBindableLogTaskView.swift; sourceTree = "<group>"; };
 		F9350B5A22B44FD300CC0399 /* OCKLogTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCKLogTaskViewController.swift; sourceTree = "<group>"; };
+		F9B48DAB22B7FF9F00D9BD9E /* OCKCustomLogTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCKCustomLogTaskViewController.swift; sourceTree = "<group>"; };
+		F9B48DAE22B8151100D9BD9E /* OCKBindableCustomLogTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCKBindableCustomLogTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +236,7 @@
 				518F9DDF22961C97009CAA48 /* OCKBindableSimpleTaskView.swift */,
 				F9350B5622B42D4C00CC0399 /* OCKBindableLogTaskView.swift */,
 				518F9DE122961C97009CAA48 /* OCKBindableSimpleLogTaskView.swift */,
+				F9B48DAE22B8151100D9BD9E /* OCKBindableCustomLogTaskView.swift */,
 				F9350B5422B3FD3D00CC0399 /* OCKBindableMultiLogTaskView.swift */,
 				518F9DE322961C97009CAA48 /* OCKBindableInstructionsTaskView.swift */,
 				518F9DE022961C97009CAA48 /* OCKBindableChecklistTaskView.swift */,
@@ -315,6 +320,7 @@
 				518F9E0522961C97009CAA48 /* OCKEventViewController.swift */,
 				F9350B5A22B44FD300CC0399 /* OCKLogTaskViewController.swift */,
 				518F9E0722961C97009CAA48 /* OCKSimpleLogTaskViewController.swift */,
+				F9B48DAB22B7FF9F00D9BD9E /* OCKCustomLogTaskViewController.swift */,
 				F9350B4A22B3F47800CC0399 /* OCKMultiLogTaskViewController.swift */,
 				518F9E0822961C97009CAA48 /* OCKInstructionsTaskViewController.swift */,
 				518F9E0922961C97009CAA48 /* OCKSimpleTaskViewController.swift */,
@@ -611,6 +617,7 @@
 				B1A1075622A065C200F93520 /* OCKDailyPageViewController.swift in Sources */,
 				518F9E3622961C97009CAA48 /* OCKEventAggregator.swift in Sources */,
 				518F9E1522961C97009CAA48 /* Collection+Extensions.swift in Sources */,
+				F9B48DAD22B7FF9F00D9BD9E /* OCKCustomLogTaskViewController.swift in Sources */,
 				E7DA1D5322A30AFD002BB1EF /* OCKHeaderBodyView.swift in Sources */,
 				F9350B5722B42D4C00CC0399 /* OCKBindableLogTaskView.swift in Sources */,
 				518F9E3122961C97009CAA48 /* OCKSimpleContactViewController.swift in Sources */,
@@ -618,6 +625,7 @@
 				518F9E3422961C97009CAA48 /* OCKCalendarViewController.swift in Sources */,
 				518F9E3322961C97009CAA48 /* OCKCalendarPageViewController.swift in Sources */,
 				518F9E2422961C97009CAA48 /* OCKBindableInstructionsTaskView.swift in Sources */,
+				F9B48DAF22B8151100D9BD9E /* OCKBindableCustomLogTaskView.swift in Sources */,
 				518F9E4122961C97009CAA48 /* OCKSimpleTaskViewController.swift in Sources */,
 				518F9E2922961C97009CAA48 /* OCKSynchronizedStoreManager.swift in Sources */,
 				518F9E2522961C97009CAA48 /* OCKBindable.swift in Sources */,

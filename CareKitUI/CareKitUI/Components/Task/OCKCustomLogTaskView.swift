@@ -9,7 +9,7 @@
 import UIKit
 
 /// Protocol for interactions with an `OCKSimpleLogTaskView`.
-public protocol OCKMultiLogTaskViewDelegate: OCKLogTaskViewDelegate {
+public protocol OCKCustomLogTaskViewDelegate: OCKLogTaskViewDelegate {
     
     /// Called when a log button was selected.
     ///
@@ -17,7 +17,7 @@ public protocol OCKMultiLogTaskViewDelegate: OCKLogTaskViewDelegate {
     ///   - multiLogTaskView: The view containing the log item.
     ///   - logButton: The item in the log that was selected.
     ///   - index: The index of the item in the log.
-    func multiLogTaskView(_ multiLogTaskView: OCKMultiLogTaskView, didSelectLog logButton: OCKButton, at index: Int)
+    func customLogTaskView(_ customLogTaskView: OCKCustomLogTaskView, didSelectValue value: Any, withUnits units: String?)
 }
 
 /// A card that displays a header, multi-line label, multiple log buttons, and a dynamic vertical stack of logged items.
@@ -37,65 +37,50 @@ public protocol OCKMultiLogTaskViewDelegate: OCKLogTaskViewDelegate {
 ///     |                                                              |
 ///     |   [instructions]                                             |
 ///     |                                                              |
-///     |  +--------------------------+  +--------------------------+  |
-///     |  | [img]  [detail]  [title] |  | [img]  [detail]  [title] |  |
-///     |  +--------------------------+  +--------------------------+  |
+///     |  +--------------------------------------------------------+  |
+///     |  | Content View (to be defined by user)                   |  |
+///     |  +--------------------------------------------------------+  |
 ///     |                                                              |
 ///     +--------------------------------------------------------------+
 ///
-open class OCKMultiLogTaskView: OCKLogTaskView {
+open class OCKCustomLogTaskView: OCKLogTaskView {
     
     // MARK: Properties
     
+    /// The button that can be hooked up to modify the list of logged items.
+    public let logButton: OCKButton = {
+        let button = OCKLabeledButton()
+        button.animatesStateChanges = false
+        button.setTitle(OCKStyle.strings.log, for: .normal)
+        button.handlesSelectionStateAutomatically = false        
+        return button
+    }()
+    
     /// Delegate that gets notified of interactions with the `OCKSimpleLogTaskView`.
-    public weak var multiLogDelegate: OCKMultiLogTaskViewDelegate?
+    public weak var customLogDelegate: OCKCustomLogTaskViewDelegate?
     
     /// The horizontal stack view that holds the log buttons.
-    private let logButtonsStackView: OCKStackView = {
+    public let contentView: OCKStackView = {
         var stackView = OCKStackView(style: .plain)
         stackView.showsOuterSeparators = false
+        stackView.axis = .vertical
         return stackView
     }()
     
-    /// The button that can be hooked up to modify the list of logged items.
-    private var logButtons = [OCKButton]()
+    override internal func setup() {
+        self.logButtonPlaceholder = self.logButton
         
-    // MARK: Methods
-    
-    /// Sets the list of Log options to be displayed.
-    ///
-    /// - Parameters:
-    ///   - options: A list of options to be displayed.
-    public func addOptions(_ options: [String]) {
-        for option in options {
-            let button = OCKLabeledButton()
-            button.animatesStateChanges = false
-            button.setTitle(option, for: .normal)
-            button.handlesSelectionStateAutomatically = false
-            button.addTarget(self, action: #selector(logButtonTapped(_:)), for: .touchUpInside)
-            
-            self.logButtons.append(button)
-            logButtonsStackView.addArrangedSubview(button)
-        }
+        super.setup()
     }
     
     override internal func styleSubviews() {
         super.styleSubviews()
         
-        logButtonsStackView.distribution = .fillEqually
-        logButtonsStackView.spacing = directionalLayoutMargins.leading + directionalLayoutMargins.trailing
+        contentView.spacing = directionalLayoutMargins.top + directionalLayoutMargins.bottom
     }
     
     override internal func addSubviews() {
-        super.addSubviews()
-        [headerView, instructionsLabel, logButtonsStackView, logItemsStackView].forEach { contentStackView.addArrangedSubview($0) }
-    }
-    
-    @objc
-    private func logButtonTapped(_ sender: OCKButton) {
-        guard let index = logButtonsStackView.arrangedSubviews.firstIndex(of: sender) else {
-            fatalError("Target was not set up properly.")
-        }
-        multiLogDelegate?.multiLogTaskView(self, didSelectLog: sender, at: index)
+        super.addSubviews()        
+        [headerView, instructionsLabel, contentView, logButton, logItemsStackView].forEach { contentStackView.addArrangedSubview($0) }
     }
 }

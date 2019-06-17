@@ -36,11 +36,23 @@ public enum OCKEventAggregator<Store: OCKStoreProtocol> {
     
     /// Counts the total number of outcomes in the entire array of events.
     case countOutcomeValues
+    
+    /// Adds the numeric value of outcomes in the entire array of events.
+    case sumOutcomeValues
 
     internal var aggregator: ([Store.Event]) -> Double {
         switch self {
         case .countOutcomeValues:
             return { events in Double(events.map { $0.outcome?.convert().values.count ?? 0 }.reduce(0, +)) }
+        case .sumOutcomeValues:
+            
+            return { events in events.map {
+                var sum:Double = 0
+                for value in $0.outcome?.convert().values ?? [] {
+                    sum += value.doubleValue ?? Double(value.integerValue ?? 0)
+                }
+                return sum
+            }.reduce(0, +) }
         }
     }
 }

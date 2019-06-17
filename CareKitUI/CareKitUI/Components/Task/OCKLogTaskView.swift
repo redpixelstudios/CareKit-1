@@ -47,6 +47,8 @@ open class OCKLogTaskView: UIView, OCKCardable {
         
     // MARK: Properties
     
+    internal var logButtonPlaceholder: UIView?
+    
     /// Delegate that gets notified of interactions with the `OCKSimpleLogTaskView`.
     public weak var delegate: OCKLogTaskViewDelegate?
     
@@ -100,7 +102,7 @@ open class OCKLogTaskView: UIView, OCKCardable {
     
     // MARK: Methods
     
-    private func setup() {
+    internal func setup() {
         addSubviews()
         styleSubviews()
         constrainSubviews()
@@ -209,7 +211,7 @@ open class OCKLogTaskView: UIView, OCKCardable {
     private func setSpacingAfterLogButton(_ spacing: CGFloat, animated: Bool) {
         let block = { [weak self] in
             guard let self = self else { return }
-            self.contentStackView.setCustomSpacing(spacing, after: self.contentStackView.arrangedSubviews[2])
+            self.contentStackView.setCustomSpacing(spacing, after: self.logButtonPlaceholder ?? self.contentStackView.arrangedSubviews[2])
         }
         
         animated ?

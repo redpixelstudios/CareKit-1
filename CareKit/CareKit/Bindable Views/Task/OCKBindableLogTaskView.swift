@@ -49,7 +49,19 @@ extension OCKBindableLogTaskView where Self: OCKLogTaskView, Task: Equatable & O
             clearItems(animated: animated)
         } else {
             for (i, value) in sortedValues.enumerated() {
-                let title = value.stringValue
+                var title: String?
+                
+                if let stringTitle = value.stringValue {
+                    title = stringTitle
+                } else if let doubleValue = value.doubleValue, let units = value.units {
+                    title = String(describing: doubleValue) + " " + units
+                } else if let intValue = value.integerValue, let units = value.units {
+                    title = String(describing: intValue) + " " + units
+                }
+                
+                if let newTitle = title, let kind = value.source {
+                    title = "\(kind): \(newTitle)"
+                }
                 
                 guard let date = value.createdAt else { break }
                 let dateString = getTimeFormatter().string(from: date).description

@@ -66,6 +66,7 @@
 		51F12D39229C81E200CA265B /* OCKLabeledCircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F12D38229C81E200CA265B /* OCKLabeledCircleButton.swift */; };
 		F9350B4E22B3F4D700CC0399 /* OCKMultiLogTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9350B4D22B3F4D600CC0399 /* OCKMultiLogTaskView.swift */; };
 		F9350B5922B4305000CC0399 /* OCKLogTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9350B5822B4305000CC0399 /* OCKLogTaskView.swift */; };
+		F9B48D7622B7F60A00D9BD9E /* OCKCustomLogTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B48D7522B7F60A00D9BD9E /* OCKCustomLogTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,6 +131,7 @@
 		51F12D38229C81E200CA265B /* OCKLabeledCircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCKLabeledCircleButton.swift; sourceTree = "<group>"; };
 		F9350B4D22B3F4D600CC0399 /* OCKMultiLogTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCKMultiLogTaskView.swift; sourceTree = "<group>"; };
 		F9350B5822B4305000CC0399 /* OCKLogTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCKLogTaskView.swift; sourceTree = "<group>"; };
+		F9B48D7522B7F60A00D9BD9E /* OCKCustomLogTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCKCustomLogTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 				518F9D4F22961BF5009CAA48 /* OCKInstructionsTaskView.swift */,
 				F9350B5822B4305000CC0399 /* OCKLogTaskView.swift */,
 				518F9D5222961BF5009CAA48 /* OCKSimpleLogTaskView.swift */,
+				F9B48D7522B7F60A00D9BD9E /* OCKCustomLogTaskView.swift */,
 				F9350B4D22B3F4D600CC0399 /* OCKMultiLogTaskView.swift */,
 				518F9D5422961BF5009CAA48 /* OCKTaskGridView.swift */,
 			);
@@ -542,6 +545,7 @@
 				518F9DAF22961BF6009CAA48 /* OCKFontConfigurator.swift in Sources */,
 				518F9D8F22961BF5009CAA48 /* OCKChecklistItemButton.swift in Sources */,
 				518F9DB722961BF6009CAA48 /* OCKSeparatorView.swift in Sources */,
+				F9B48D7622B7F60A00D9BD9E /* OCKCustomLogTaskView.swift in Sources */,
 				518F9DB122961BF6009CAA48 /* OCKAppearanceConfigurator.swift in Sources */,
 				518F9DA222961BF6009CAA48 /* OCKBarPlotView.swift in Sources */,
 				518F9DBD22961BF6009CAA48 /* OCKButton.swift in Sources */,
