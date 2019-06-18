@@ -276,6 +276,37 @@ open class OCKEventViewController<Store: OCKStoreProtocol>: OCKSynchronizedViewC
         return counter
     }
     
+    internal func updateOutcomeValues(_ newValues: [OCKOutcomeValue]) {
+        guard let outcome = event?.outcome else { return }
+        
+        // delete the whole outcome if there is only one value remaining
+        guard newValues.count > 0 else {
+            storeManager.store.deleteOutcomes([outcome], queue: .main) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success: break
+                case .failure(let error):
+                    self.delegate?.eventViewController(self, didFailWithError: error)
+                }
+            }
+            return
+        }
+        
+        // Update outcome
+        var convertedOutcome = outcome.convert()
+        convertedOutcome.values = newValues
+        
+        let updatedOutcome = Store.Outcome(value: convertedOutcome)
+        storeManager.store.updateOutcomes([updatedOutcome], queue: .main) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success: break
+            case .failure(let error):
+                self.delegate?.eventViewController(self, didFailWithError: error)
+            }
+        }
+    }
+    
     internal func deleteOutcomeValue(_ value: Int?) {
         guard let outcome = event?.outcome else { return }
         // delete the whole outcome if there is only one value remaining

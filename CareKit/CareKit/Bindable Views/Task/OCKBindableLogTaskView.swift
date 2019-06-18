@@ -66,8 +66,14 @@ extension OCKBindableLogTaskView where Self: OCKLogTaskView, Task: Equatable & O
                 guard let date = value.createdAt else { break }
                 let dateString = getTimeFormatter().string(from: date).description
                 
+                var image: UIImage?
+                
+                if value.notes?.count ?? 0 > 0 {
+                    image = UIImage(systemName: "doc.text.fill")
+                }
+                
                 if i < items.count {
-                    updateItem(at: i, withTitle: title ?? OCKStyle.strings.valueLogged, detail: dateString)
+                    updateItem(at: i, withTitle: title ?? OCKStyle.strings.valueLogged, detail: dateString, image: image)
                 } else {
                     appendItem(withTitle: title ?? OCKStyle.strings.valueLogged, detail: dateString, animated: animated)
                 }

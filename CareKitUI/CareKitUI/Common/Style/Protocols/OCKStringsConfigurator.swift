@@ -46,6 +46,7 @@ public protocol OCKStringsConfigurator {
     var tasks: String { get }
     var charts: String { get }
     var contacts: String { get }
+    var addNote: String { get }
 }
 
 public extension OCKStringsConfigurator {
@@ -63,4 +64,5 @@ public extension OCKStringsConfigurator {
     var tasks: String { "Tasks" }
     var charts: String { "Charts" }
     var contacts: String { "Contacts" }
+    var addNote: String { "Add Note" }
 }

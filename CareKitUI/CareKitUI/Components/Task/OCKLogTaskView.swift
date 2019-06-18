@@ -146,11 +146,16 @@ open class OCKLogTaskView: UIView, OCKCardable {
     ///   - detail: The detail text to display in the item. The text is tinted by default.
     /// - Returns: The item that was updated.
     @discardableResult
-    public func updateItem(at index: Int, withTitle title: String?, detail: String?) -> OCKButton? {
+    public func updateItem(at index: Int, withTitle title: String?, detail: String?, image: UIImage? = nil) -> OCKButton? {
         guard index < logItemsStackView.arrangedSubviews.count else { return nil }
         let button = items[index]
         button.setTitle(title, for: .normal)
         button.setDetail(detail, for: .normal)
+        
+        if let image = image {
+            button.setImage(image, for: .normal)
+        }
+        
         return button
     }
     

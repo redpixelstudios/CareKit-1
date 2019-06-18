@@ -46,17 +46,49 @@ open class OCKLogTaskViewController<Store: OCKStoreProtocol, TaskView: OCKLogTas
             
             // Sort values by date value
             let values = self.event?.convert().outcome?.values ?? []
-            let sortedValues = values.sorted {
+            var sortedValues = values.sorted {
                 guard let date1 = $0.createdAt, let date2 = $1.createdAt else { return true }
                 return date1 < date2
             }
             
             guard index < sortedValues.count else { return }
-            let intValue = sortedValues[index].integerValue
-            self.deleteOutcomeValue(intValue)
+            
+            sortedValues.remove(at: index)
+            
+            self.updateOutcomeValues(sortedValues)
+        }
+        
+        let addNote = UIAlertAction(title: OCKStyle.strings.addNote, style: .default) { [weak self] (action) in
+            guard let self = self else { return }
+
+            // Sort values by date value
+            let values = self.event?.convert().outcome?.values ?? []
+            var sortedValues = values.sorted {
+                guard let date1 = $0.createdAt, let date2 = $1.createdAt else { return true }
+                return date1 < date2
+            }
+
+            guard index < sortedValues.count else { return }
+            
+            let notesController = UIAlertController(title: OCKStyle.strings.addNote, message: nil, preferredStyle: .alert)
+            notesController.addTextField { (textField) in
+                // configure text field
+            }
+            
+            let cancel = UIAlertAction(title: OCKStyle.strings.cancel, style: .default, handler: nil)
+            
+            let save = UIAlertAction(title: OCKStyle.strings.addNote, style: .default) { [weak self] (action) in
+                sortedValues[index].notes = [OCKNote(author: nil, title: nil, content: (notesController.textFields![0].text))]
+                
+                self?.updateOutcomeValues(sortedValues)
+            }
+            
+            [save, cancel].forEach { notesController.addAction($0) }
+            
+            self.present(notesController, animated: true, completion: nil)
         }
 
-        [delete, cancel].forEach { actionSheet.addAction($0) }
+        [delete, addNote, cancel].forEach { actionSheet.addAction($0) }
         present(actionSheet, animated: true, completion: nil)
     }
 }
