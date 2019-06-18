@@ -65,30 +65,29 @@ open class OCKCustomLogTaskViewController<Store: OCKStoreProtocol>: OCKLogTaskVi
     @objc private func logButtonPressed(_ sender: OCKButton) {
         guard let outcomeValues = self.dataSource?.customLogTaskViewController(valuesForCustomLogTaskViewController: self) else { return }
         
-        for outcomeValue in outcomeValues {
-            if let outcome = event?.outcome {
-                
-                // save a new outcome value if there is already an outcome
-                var convertedOutcome = outcome.convert()
-                var newValues = convertedOutcome.values
+        if let outcome = event?.outcome {            
+            // save a new outcome value if there is already an outcome
+            var convertedOutcome = outcome.convert()
+            var newValues = convertedOutcome.values
+            
+            for outcomeValue in outcomeValues {
                 newValues.append(outcomeValue)
-                
-                convertedOutcome.values = newValues
-                let updatedOutcome = Store.Outcome(value: convertedOutcome)
-                
-                storeManager.store.updateOutcomes([updatedOutcome], queue: .main) { [weak self] result in
-                    guard let self = self else { return }
-                    switch result {
-                    case .success: break
-                    case .failure(let error):
-                        self.delegate?.eventViewController(self, didFailWithError: error)
-                    }
-                }
-            } else {
-                self.saveNewOutcome(withValues: [outcomeValue])
             }
+            
+            convertedOutcome.values = newValues
+            let updatedOutcome = Store.Outcome(value: convertedOutcome)
+            
+            storeManager.store.updateOutcomes([updatedOutcome], queue: .main) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success: break
+                case .failure(let error):
+                    self.delegate?.eventViewController(self, didFailWithError: error)
+                }
+            }
+        } else {
+            self.saveNewOutcome(withValues: outcomeValues)
         }
-        
     }
     
 }
